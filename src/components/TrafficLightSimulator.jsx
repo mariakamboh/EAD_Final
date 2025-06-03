@@ -2,12 +2,23 @@ import React from 'react';
 function TrafficLightSimulator(){
   return (
     <body style={styles.mainBackground}>
-    <div style={styles.container}>
+   <div style={styles.container}>
       <h2 style={styles.heading}>Traffic Light Simulator</h2>
       <div style={styles.trafficLight}>
-        <div style={{ ...styles.light, backgroundColor: 'grey' }} />
-        <div style={{ ...styles.light, backgroundColor: 'grey' }} />
-        <div style={{ ...styles.light, backgroundColor: 'grey' }} />
+        {['red', 'yellow', 'green'].map((color) => (
+          <div
+            key={color}
+            style={{
+              ...styles.light,
+              backgroundColor: activeLight === color ? color : '#333',
+              boxShadow:
+                activeLight === color
+                  ? `0 0 20px 5px ${color}`
+                  : 'inset 0 0 10px #000',
+              transition: 'background-color 0.5s, box-shadow 0.5s',
+            }}
+          />
+        ))}
       </div>
     </div>
     </body>
