@@ -1,26 +1,27 @@
-import React from 'react';
+import React from 'react';  
+import { useEffect, useState } from 'react';
 function TrafficLightSimulator(){
+    const [light, setLight] = useState('yellow');
+    useEffect(() => {
+        const sequence=['red', 'yellow', 'green'];
+        let i=0;
+        const intrvl=setInterval(() => {
+          i=(i+1)%sequence.length;
+          setLight(sequence[i]);
+        }, 3000);
+    
+        return() => clearInterval(intrvl);
+      }, []);
   return (
     <body style={styles.mainBackground}>
-   <div style={styles.container}>
-      <h2 style={styles.heading}>Traffic Light Simulator</h2>
-      <div style={styles.trafficLight}>
-        {['red', 'yellow', 'green'].map((color) => (
-          <div
-            key={color}
-            style={{
-              ...styles.light,
-              backgroundColor: activeLight === color ? color : '#333',
-              boxShadow:
-                activeLight === color
-                  ? `0 0 20px 5px ${color}`
-                  : 'inset 0 0 10px #000',
-              transition: 'background-color 0.5s, box-shadow 0.5s',
-            }}
-          />
-        ))}
-      </div>
-    </div>
+        <div style={styles.container}>
+            <h2 style={styles.heading}>Traffic Light Simulator</h2>
+                <div style={styles.trafficLight}>
+                    {['red', 'yellow', 'green'].map((color) => (
+                        <div key={color} style={{...styles.light, backgroundColor: light === color ? color : '#333', }} />
+                    ))}
+                </div>
+        </div>
     </body>
   );
 };
@@ -29,7 +30,6 @@ const styles = {
     mainBackground: {
         backgroundColor:'black'
     },
-
     container: {
         backgroundColor: 'black',
         color: 'white',
