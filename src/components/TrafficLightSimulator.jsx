@@ -18,7 +18,10 @@ function TrafficLightSimulator(){
             <h2 style={styles.heading}>Traffic Light Simulator</h2>
                 <div style={styles.trafficLight}>
                     {['red', 'yellow', 'green'].map((color) => (
-                        <div key={color} style={{...styles.light, backgroundColor: light === color ? color : '#333', }} />
+                        <div key={color} style={{...styles.light,
+                             backgroundColor: light === color ? color : '#2f2f2f',
+                              boxShadow:light === color? `0 0 20px 5px ${color}` : 'inset 0 0 10px black',
+                              transition: 'background-color 0.5s, box-shadow 0.5s', }} />
                     ))}
                 </div>
         </div>
